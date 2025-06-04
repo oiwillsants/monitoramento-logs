@@ -1,0 +1,22 @@
+name: Coleta de Logs Automática
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # A cada hora
+  workflow_dispatch:
+
+jobs:
+  executar-coletor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Executar script de coleta de logs
+        run: |
+          python3 coletor.py
